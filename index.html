@@ -17,12 +17,31 @@
 
     <button onclick="newQuote()">Za Hanu</button>
 
-    <audio id="music" controls autoplay loop>
-      <source src="https://example.com/maria-callas.mp3" type="audio/mpeg">
+    <audio id="music" loop>
+      <source src="https://musopen.org/data/media/recordings/1118/19883_ombrah_maifu.mp3" type="audio/mpeg">
       Tvoj preglednik ne podržava audio.
     </audio>
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    const quotes = [
+      "Kao da sopran srca mog pjeva tvoje ime u svakoj tišini.",
+      "U tvom pogledu, sve arije pronalaze svoj kraj.",
+      "Ti si melodija koju nijedna opera ne može otpjevati do kraja.",
+      "Kada šutiš, svijet se čini kao najnježnija partitura.",
+      "Hana, ti si moja jedina scena i posljednji aplauz."
+    ];
+
+    function newQuote() {
+      const random = Math.floor(Math.random() * quotes.length);
+      document.getElementById('quoteBox').innerHTML = `<p class="quote">${quotes[random]}</p>`;
+      const music = document.getElementById('music');
+      if (music.paused) {
+        music.play().catch(() => {
+          console.log("Audio playback blocked.");
+        });
+      }
+    }
+  </script>
 </body>
 </html>
