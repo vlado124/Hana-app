@@ -3,76 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Hana – Arietta mog srca</title>
-  <link rel="stylesheet" href="style.css"/>
+  <title>Arietta mog srca</title>
   <style>
-    #welcome {
-      position: fixed;
-      z-index: 999;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      background: #1e1b26;
-      color: #fff;
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: radial-gradient(circle at center, #1e1b26, #0c0b10);
+      color: #f9f3ff;
+      height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      text-align: center;
+      overflow: hidden;
     }
-    #welcome button {
+
+    #welcome {
+      animation: fadeIn 2s ease-out forwards;
+    }
+
+    .heart {
+      font-size: 4em;
+      animation: pulse 2s infinite;
+      color: #ff94d0;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 1.6em;
+      font-weight: normal;
+      color: #ffffffcc;
+    }
+
+    #quote-box {
+      margin-top: 40px;
+      font-size: 1.3em;
+      padding: 0 20px;
+      max-width: 500px;
+    }
+
+    button {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 1em;
       background-color: #d4a0f7;
       color: #1e1b26;
-      padding: 14px 24px;
       border: none;
-      border-radius: 10px;
-      font-size: 1.2em;
-      margin-top: 20px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #f3ceff;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); opacity: 0.8; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
   </style>
 </head>
 <body>
   <div id="welcome">
-    <h2>Dodirni da uđeš</h2>
-    <button onclick="enterApp()">Ulaz</button>
-  </div>
-
-  <div class="container" style="display:none;" id="appContent">
-    <h1 class="title">Arietta mog srca</h1>
-    <p class="subtitle">Posvećeno Hani Salihović</p>
-
-    <div class="quote-box" id="quoteBox">
-      <p class="quote">"Kao da sopran srca mog pjeva tvoje ime u svakoj tišini."</p>
+    <div class="heart">♥</div>
+    <h1>Nisam napisao simfoniju, ali si ti postala sve moje note.</h1>
+    <div id="quote-box">
+      <p id="quote">"Ljubav mi je postala tvoje ime."</p>
     </div>
-
-    <button onclick="newQuote()">Za Hanu</button>
-
-    <audio id="music" loop>
-      <source src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Ave_Maria_Bach_Gounod_-_Instrumental.ogg" type="audio/ogg">
-      Tvoj preglednik ne podržava audio.
-    </audio>
+    <button onclick="newQuote()">Zauvijek</button>
   </div>
 
   <script>
     const quotes = [
-      "Kao da sopran srca mog pjeva tvoje ime u svakoj tišini.",
-      "U tvom pogledu, sve arije pronalaze svoj kraj.",
-      "Ti si melodija koju nijedna opera ne može otpjevati do kraja.",
-      "Kada šutiš, svijet se čini kao najnježnija partitura.",
-      "Hana, ti si moja jedina scena i posljednji aplauz."
+      "Ljubav mi je postala tvoje ime.",
+      "Svaka tišina odjekuje tvojim pogledom.",
+      "Kad šutiš, ja postajem mir.",
+      "Ne tražim vječnost. Samo da traješ.",
+      "Ti nisi pjesma. Ti si razlog da postoji melodija.",
+      "Da mogu otpjevati osjećaj – bilo bi tvoje ime u svakoj noti.",
+      "Hana – ako ovo ikad pročitaš, znaj da si voljena na način koji ni riječi ni vrijeme ne znaju objasniti."
     ];
 
     function newQuote() {
       const random = Math.floor(Math.random() * quotes.length);
-      document.getElementById('quoteBox').innerHTML = `<p class="quote">${quotes[random]}</p>`;
-    }
-
-    function enterApp() {
-      document.getElementById('welcome').style.display = 'none';
-      document.getElementById('appContent').style.display = 'block';
-      const music = document.getElementById('music');
-      music.play().catch(() => {
-        console.log("Playback failed.");
-      });
+      document.getElementById('quote').innerText = quotes[random];
     }
   </script>
 </body>
